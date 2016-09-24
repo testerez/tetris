@@ -1,6 +1,17 @@
 const canvas = <HTMLCanvasElement>document.getElementById('tetris');
 const context = canvas.getContext('2d');
 
+type matrix = number[][];
+type point = {
+  x: number;
+  y: number;
+};
+type Player = {
+  pos: { x: number, y: number };
+  matrix: matrix;
+  score: number;
+}
+
 context.scale(20, 20);
 
 function arenaSweep() {
@@ -21,7 +32,7 @@ function arenaSweep() {
   }
 }
 
-function collide(arena, player) {
+function collide(arena: matrix, player: Player) {
   const m = player.matrix;
   const o = player.pos;
   for (let y = 0; y < m.length; ++y) {
@@ -36,15 +47,15 @@ function collide(arena, player) {
   return false;
 }
 
-function createMatrix(w, h) {
-  const matrix = [];
+function createMatrix(w: number, h: number) {
+  const matrix: matrix = [];
   while (h--) {
     matrix.push(new Array(w).fill(0));
   }
   return matrix;
 }
 
-function createPiece(type) {
+function createPiece(type: string) {
   if (type === 'I') {
     return [
       [0, 1, 0, 0],
@@ -90,7 +101,7 @@ function createPiece(type) {
   }
 }
 
-function drawMatrix(matrix, offset) {
+function drawMatrix(matrix: matrix, offset: point) {
   matrix.forEach((row, y) => {
     row.forEach((value, x) => {
       if (value !== 0) {
@@ -111,7 +122,7 @@ function draw() {
   drawMatrix(player.matrix, player.pos);
 }
 
-function merge(arena, player) {
+function merge(arena: matrix, player: Player) {
   player.matrix.forEach((row, y) => {
     row.forEach((value, x) => {
       if (value !== 0) {
@@ -121,7 +132,7 @@ function merge(arena, player) {
   });
 }
 
-function rotate(matrix, dir) {
+function rotate(matrix: matrix, dir: number) {
   for (let y = 0; y < matrix.length; ++y) {
     for (let x = 0; x < y; ++x) {
       [
@@ -153,7 +164,7 @@ function playerDrop() {
   dropCounter = 0;
 }
 
-function playerMove(offset) {
+function playerMove(offset: number) {
   player.pos.x += offset;
   if (collide(arena, player)) {
     player.pos.x -= offset;
@@ -173,7 +184,7 @@ function playerReset() {
   }
 }
 
-function playerRotate(dir) {
+function playerRotate(dir:number) {
   const pos = player.pos.x;
   let offset = 1;
   rotate(player.matrix, dir);
@@ -239,7 +250,7 @@ const arena = createMatrix(12, 20);
 
 const player = {
   pos: { x: 0, y: 0 },
-  matrix: null,
+  matrix: null as matrix,
   score: 0,
 };
 
