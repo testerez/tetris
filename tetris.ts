@@ -1,4 +1,4 @@
-const canvas = document.getElementById('tetris');
+const canvas = <HTMLCanvasElement>document.getElementById('tetris');
 const context = canvas.getContext('2d');
 
 context.scale(20, 20);
@@ -207,7 +207,7 @@ function update(time = 0) {
 }
 
 function updateScore() {
-  document.getElementById('score').innerText = player.score;
+  document.getElementById('score').innerText = player.score as any;
 }
 
 document.addEventListener('keydown', event => {
