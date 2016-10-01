@@ -1,0 +1,27 @@
+{
+  "name": "tetris",
+  "version": "1.0.0",
+  "description": "A hacked together Tetris - converted to Typesctipt ",
+  "main": "tetris.js",
+  "scripts": {
+    "start": "tsc -p . && opn index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/testerez/tetris.git"
+  },
+  "keywords": [
+    "tetris",
+    "typescript",
+    "canvas"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/testerez/tetris/issues"
+  },
+  "homepage": "https://github.com/testerez/tetris#readme",
+  "devDependencies": {
+    "opn-cli": "^3.1.0",
+    "typescript": "^2.0.3"
+  }
+}
